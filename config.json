@@ -1,0 +1,17 @@
+{
+  "path": "outputs/",
+  "verifiable-claim-detection": {
+    "default-model": "xlm-roberta-base",
+    "train_path": "data/train.json",
+    "dev_path": "data/dev.json",
+    "test_path": "data/test.json",
+
+    "max-length": 128,
+    "batch-size": 2,
+    "learning-rate": 2e-5,
+    "epochs": 1,
+
+    "use_entity_types": false,
+    "use_entity_popularity": false
+  }
+}

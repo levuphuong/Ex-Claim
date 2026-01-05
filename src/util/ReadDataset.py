@@ -44,16 +44,24 @@ def readSyntheticTestData(path, languages):
 
     return dataset
 
-
 def readCombinedTestData(path):
     """
     Read the combined test data
     :param path: project path
-    :return: test data
+    :return: test data (DataFrame, can be empty)
     """
-    test_data = pd.read_csv(path + "Data/All/combined_test_predictions.csv")  # TODO: check whether existing
+    # file_path = path + "Data/All/combined_dev_test_predictions.csv"
+    file_path = path + DATA_DIR +  "CheckThat-2022/english/verifiable-claim-detection/test.csv"
+
+    # TODO: check whether existing
+    if not os.path.exists(file_path):
+        logger.warning(f"Combined test data not found: {file_path}")
+        return pd.DataFrame()   # return empty
+
+    test_data = pd.read_csv(file_path)
     logger.info(f"Combined test data read. Size - {test_data.shape[0]}")
     return test_data
+
 
 
 def mergeTrainTestData(dataset, test_data):
@@ -120,7 +128,8 @@ def readCheckThat2022(path, task):
             # test_gold = pd.read_csv(task_dir + "/test_gold.tsv", sep="\t")
             logger.info(f"Data size: train - {train.shape[0]}, dev - {dev.shape[0]}, dev_test - {dev_test.shape[0]}")
             # NOTE: test_gold is assigned as test
-            data = {"train": train, "dev": dev, "dev_test": dev_test}
+            
+            data = {"train": train, "dev": dev, "dev_test": dev_test, "test": dev_test}
             printDataStatistics(data)
             dataset[language] = data
 

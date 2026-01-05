@@ -16,7 +16,7 @@ model_name = claim_detection_config["default-model"]
 max_length = claim_detection_config["max-length"]  # Refer BertTweet Paper
 
 # Read dataset
-dataset = ReadDataset.readTrainTestData(path, task, True)
+dataset = ReadDataset.readTrainTestData(path, task, False)
 
 # Get embedding representation
 tokenized_input, class_labels, word_embeddings = Embedding.getEmbeddedDataset(path, model_name, dataset, max_length)
@@ -79,5 +79,5 @@ for i in range(iterations):
 
     best_model = Training.loadModel(model, MODELS_PATH + model_name)
     Evaluation.evaluateTestData(best_model, model_name, input_vectors, dataset, "test", path)
-Results.computeAveragePerformance(path, "test")
+Results.computeAveragePerformance(path, "dev_test")
 logging.info(f"Completed training {model_prefix}")

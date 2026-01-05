@@ -22,7 +22,7 @@ def readModelAndTokenizer(path, model_name):
 
     if os.path.exists(MODEL_DIR):
         model = AutoModel.from_pretrained(MODEL_DIR)
-        tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR, add_special_tokens=False)
+        tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR)
     else:
         model, tokenizer = downloadPretrainedModel(path, model_name)
 

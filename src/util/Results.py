@@ -19,6 +19,7 @@ def getModelNames(test_data):
     logging.info(f"Models analysed: {models}")
     return models
 
+iterations = 10
 
 def getLanguageLevelResults(test_data, models, columns_to_mean):
     """
@@ -41,7 +42,7 @@ def getLanguageLevelResults(test_data, models, columns_to_mean):
             recallL = []
             f1_scoresL = []
 
-            for i in range(10):
+            for i in range(iterations):
                 col_name = f"{model}-{i}"
                 predictions = language_data[col_name]
                 accuracy = accuracy_score(true_prediction, predictions)
