@@ -146,3 +146,4 @@ mkdir -p outputs/Models/Claim-Detection
 mkdir -p outputs/Data/All
 mkdir -p outputs/Results/Claim-Detection
 python src/evaluation/claim-detectionE.py
+python download.py
