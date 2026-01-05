@@ -93,29 +93,25 @@ echo "===== ALL LANGUAGES PROCESSED ====="
 
 echo "===== Downloading mGENRE pretrained model ====="
 
-# Thư mục đích (đúng với code EntityLinking.py)
 MODEL_DIR="outputs/Pretrained-models/mGENRE"
-
 mkdir -p ${MODEL_DIR}
 
-# Cài huggingface_hub nếu chưa có
+# Cài CLI mới
 pip install --quiet huggingface_hub
 
-# Download marisa trie (BẮT BUỘC)
-huggingface-cli download facebook/mgenre-wiki \
+# Download trie (BẮT BUỘC)
+hf download facebook/mgenre-wiki \
   titles_lang_all105_marisa_trie_with_redirect.pkl \
-  --local-dir ${MODEL_DIR} \
-  --local-dir-use-symlinks False
+  --local-dir ${MODEL_DIR}
 
 echo "✓ Downloaded titles_lang_all105_marisa_trie_with_redirect.pkl"
 
-# (OPTIONAL nhưng nên có) download model + config
-huggingface-cli download facebook/mgenre-wiki \
-  model.pt config.json \
-  --local-dir ${MODEL_DIR} \
-  --local-dir-use-symlinks False
+# (Optional nhưng nên có)
+hf download facebook/mgenre-wiki \
+  config.json \
+  --local-dir ${MODEL_DIR}
 
-echo "✓ Downloaded model.pt and config.json"
+echo "✓ Downloaded config.json"
 
 echo "===== mGENRE download completed ====="
 ls -lh ${MODEL_DIR}
