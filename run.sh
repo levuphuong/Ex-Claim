@@ -122,8 +122,8 @@ ls -lh ${MODEL_DIR}
 
 # echo "===== INSTALL RUNTIME DEPENDENCIES ====="
 
-# pip install --no-cache-dir \
-#     beautifulsoup4 \
+pip install --no-cache-dir \
+    fastapi 
 #     pandas \
 #     gensim \
 #     tensorboardX \

@@ -33,7 +33,7 @@ output_size = 2
 learning_rate = 3e-5
 epochs = 30
 MODELS_PATH = path + "Models/Claim-Detection/"
-iterations = 10
+iterations = 2
 ee_size = 128
 we_size = Training.getInputSize(word_embeddings)
 

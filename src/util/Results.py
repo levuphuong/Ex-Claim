@@ -19,7 +19,7 @@ def getModelNames(test_data):
     logging.info(f"Models analysed: {models}")
     return models
 
-iterations = 10
+iterations = 2
 
 def getLanguageLevelResults(test_data, models, columns_to_mean):
     """
