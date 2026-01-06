@@ -123,7 +123,8 @@ ls -lh ${MODEL_DIR}
 # echo "===== INSTALL RUNTIME DEPENDENCIES ====="
 
 pip install --no-cache-dir \
-    fastapi 
+    fastapi \
+    marisa-trie
 #     pandas \
 #     gensim \
 #     tensorboardX \
