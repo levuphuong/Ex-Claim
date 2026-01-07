@@ -111,15 +111,31 @@ hf download facebook/mgenre-wiki \
   config.json \
   --local-dir ${MODEL_DIR}
 
+
+  # ==============================
+# CONFIG
+# ==============================
+MODEL_DIR="outputs/Pretrained-models/mGENRE"
+MODEL_NAME="fairseq_multilingual_entity_disambiguation"
+
+mkdir -p ${MODEL_DIR}
+cd ${MODEL_DIR}
+
+echo "📁 Working directory: $(pwd)"
+
+# ==============================
+# DOWNLOAD MODEL (fairseq)
+# ==============================
+if [ ! -d "${MODEL_NAME}" ]; then
+    echo "⬇️ Downloading mGENRE fairseq model..."
+    wget -c https://dl.fbaipublicfiles.com/GENRE/${MODEL_NAME}.tar.gz
+    tar -xvf ${MODEL_NAME}.tar.gz
+    rm ${MODEL_NAME}.tar.gz
+else
+    echo "✅ Model already exists: ${MODEL_NAME}"
+fi
+
 echo "✓ Downloaded config.json"
-
-mkdir -p outputs/Pretrained-models/mGENRE
-
-# Download fairseq model
-hf download facebook/mgenre \
-  fairseq_multilingual_entity_disambiguation \
-  --local-dir outputs/Pretrained-models/mGENRE
-
 
 echo "===== mGENRE download completed ====="
 ls -lh ${MODEL_DIR}
