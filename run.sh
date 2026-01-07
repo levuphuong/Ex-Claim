@@ -140,6 +140,8 @@ echo "✓ Downloaded config.json"
 echo "===== mGENRE download completed ====="
 ls -lh ${MODEL_DIR}
 
+cd -
+
 
 # echo "STEP 0: install missing python packages (debug)"
 # pip install --no-cache-dir pandas==2.1.4
