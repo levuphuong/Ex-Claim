@@ -113,6 +113,15 @@ hf download facebook/mgenre-wiki \
 
 echo "✓ Downloaded config.json"
 
+mkdir -p outputs/Pretrained-models/mGENRE
+
+# Download fairseq model
+hf download facebook/mgenre \
+  fairseq_multilingual_entity_disambiguation \
+  --local-dir outputs/Pretrained-models/mGENRE \
+  --local-dir-use-symlinks False
+
+
 echo "===== mGENRE download completed ====="
 ls -lh ${MODEL_DIR}
 
