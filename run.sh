@@ -129,7 +129,7 @@ echo "📁 Working directory: $(pwd)"
 if [ ! -d "${MODEL_NAME}" ]; then
     echo "⬇️ Downloading mGENRE fairseq model..."
     wget -c https://dl.fbaipublicfiles.com/GENRE/${MODEL_NAME}.tar.gz
-    tar -xvf ${MODEL_NAME}.tar.gz
+    tar --no-same-owner -xvf ${MODEL_NAME}.tar.gz
     rm ${MODEL_NAME}.tar.gz
 else
     echo "✅ Model already exists: ${MODEL_NAME}"
