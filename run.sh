@@ -118,8 +118,7 @@ mkdir -p outputs/Pretrained-models/mGENRE
 # Download fairseq model
 hf download facebook/mgenre \
   fairseq_multilingual_entity_disambiguation \
-  --local-dir outputs/Pretrained-models/mGENRE \
-  --local-dir-use-symlinks False
+  --local-dir outputs/Pretrained-models/mGENRE
 
 
 echo "===== mGENRE download completed ====="
