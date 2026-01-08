@@ -37,10 +37,9 @@ RUN pip install \
 # fairseq OK khi pip <24.1
 # RUN pip install fairseq==0.12.2
 
-RUN git clone --branch fixing_prefix_allowed_tokens_fn https://github.com/nicola-decao/fairseq
-RUN cd fairseq
-RUN pip install --editable ./
-RUN cd -
+RUN git clone --branch fixing_prefix_allowed_tokens_fn https://github.com/nicola-decao/fairseq && \
+    pip install --editable fairseq
+
 
 # (nếu dùng GENRE)
 RUN git clone https://github.com/facebookresearch/GENRE.git
