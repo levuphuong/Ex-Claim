@@ -71,6 +71,7 @@ RUN if [ ! -d "${MODEL_NAME}" ]; then \
         echo "✅ Model already exists: ${MODEL_NAME}"; \
     fi
 
+WORKDIR /app
 
 # Download trie (BẮT BUỘC)
 RUN hf download facebook/mgenre-wiki \
@@ -88,6 +89,7 @@ RUN echo "===== mGENRE download completed ====="
 
 
 COPY . .
+
 
 # Cho phép chạy script
 RUN chmod +x run.sh
