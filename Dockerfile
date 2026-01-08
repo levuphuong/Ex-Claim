@@ -29,7 +29,10 @@ RUN pip install \
     sacremoses \
     sentencepiece \
     scikit-learn \
-    xlsxwriter
+    xlsxwriter \
+    fastapi \
+    marisa-trie \
+    huggingface_hub
 
 # fairseq OK khi pip <24.1
 RUN pip install fairseq==0.12.2
@@ -37,6 +40,48 @@ RUN pip install fairseq==0.12.2
 # (nếu dùng GENRE)
 RUN git clone https://github.com/facebookresearch/GENRE.git
 RUN pip install -e GENRE
+
+
+# ===========================
+# ENV + WORKDIR
+# ===========================
+ENV MODEL_DIR="outputs/Pretrained-models/mGENRE" \
+    MODEL_NAME="fairseq_multilingual_entity_disambiguation"
+
+# ===========================
+# Tạo folder model
+# ===========================
+RUN mkdir -p ${MODEL_DIR}
+
+WORKDIR /app/${MODEL_DIR}
+
+# ===========================
+# Download + Extract mGENRE
+# ===========================
+RUN if [ ! -d "${MODEL_NAME}" ]; then \
+        echo "⬇️ Downloading mGENRE fairseq model..."; \
+        wget -c https://dl.fbaipublicfiles.com/GENRE/${MODEL_NAME}.tar.gz; \
+        tar --no-same-owner -xvf ${MODEL_NAME}.tar.gz; \
+        rm ${MODEL_NAME}.tar.gz; \
+    else \
+        echo "✅ Model already exists: ${MODEL_NAME}"; \
+    fi
+
+
+# Download trie (BẮT BUỘC)
+RUN hf download facebook/mgenre-wiki \
+      titles_lang_all105_marisa_trie_with_redirect.pkl \
+      --local-dir ${MODEL_DIR}
+
+# Optional nhưng nên có
+RUN hf download facebook/mgenre-wiki \
+      config.json \
+      --local-dir ${MODEL_DIR}
+
+
+# Optional log
+RUN echo "===== mGENRE download completed ====="
+
 
 COPY . .
 

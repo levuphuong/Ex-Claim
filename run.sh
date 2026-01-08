@@ -93,54 +93,54 @@ echo "===== ALL LANGUAGES PROCESSED ====="
 
 echo "===== Downloading mGENRE pretrained model ====="
 
-MODEL_DIR="outputs/Pretrained-models/mGENRE"
-mkdir -p ${MODEL_DIR}
+# MODEL_DIR="outputs/Pretrained-models/mGENRE"
+# mkdir -p ${MODEL_DIR}
 
-# Cài CLI mới
-pip install --quiet huggingface_hub
+# # # Cài CLI mới
+# # pip install --quiet huggingface_hub
 
-# Download trie (BẮT BUỘC)
-hf download facebook/mgenre-wiki \
-  titles_lang_all105_marisa_trie_with_redirect.pkl \
-  --local-dir ${MODEL_DIR}
+# # Download trie (BẮT BUỘC)
+# hf download facebook/mgenre-wiki \
+#   titles_lang_all105_marisa_trie_with_redirect.pkl \
+#   --local-dir ${MODEL_DIR}
 
-echo "✓ Downloaded titles_lang_all105_marisa_trie_with_redirect.pkl"
+# echo "✓ Downloaded titles_lang_all105_marisa_trie_with_redirect.pkl"
 
-# (Optional nhưng nên có)
-hf download facebook/mgenre-wiki \
-  config.json \
-  --local-dir ${MODEL_DIR}
+# # (Optional nhưng nên có)
+# hf download facebook/mgenre-wiki \
+#   config.json \
+#   --local-dir ${MODEL_DIR}
 
 
   # ==============================
 # CONFIG
 # ==============================
-MODEL_DIR="outputs/Pretrained-models/mGENRE"
-MODEL_NAME="fairseq_multilingual_entity_disambiguation"
+# MODEL_DIR="outputs/Pretrained-models/mGENRE"
+# MODEL_NAME="fairseq_multilingual_entity_disambiguation"
 
-mkdir -p ${MODEL_DIR}
-cd ${MODEL_DIR}
+# mkdir -p ${MODEL_DIR}
+# cd ${MODEL_DIR}
 
-echo "📁 Working directory: $(pwd)"
+# echo "📁 Working directory: $(pwd)"
 
-# ==============================
-# DOWNLOAD MODEL (fairseq)
-# ==============================
-if [ ! -d "${MODEL_NAME}" ]; then
-    echo "⬇️ Downloading mGENRE fairseq model..."
-    wget -c https://dl.fbaipublicfiles.com/GENRE/${MODEL_NAME}.tar.gz
-    tar --no-same-owner -xvf ${MODEL_NAME}.tar.gz
-    rm ${MODEL_NAME}.tar.gz
-else
-    echo "✅ Model already exists: ${MODEL_NAME}"
-fi
+# # ==============================
+# # DOWNLOAD MODEL (fairseq)
+# # ==============================
+# if [ ! -d "${MODEL_NAME}" ]; then
+#     echo "⬇️ Downloading mGENRE fairseq model..."
+#     wget -c https://dl.fbaipublicfiles.com/GENRE/${MODEL_NAME}.tar.gz
+#     tar --no-same-owner -xvf ${MODEL_NAME}.tar.gz
+#     rm ${MODEL_NAME}.tar.gz
+# else
+#     echo "✅ Model already exists: ${MODEL_NAME}"
+# fi
 
-echo "✓ Downloaded config.json"
+# echo "✓ Downloaded config.json"
 
-echo "===== mGENRE download completed ====="
-ls -lh ${MODEL_DIR}
+# echo "===== mGENRE download completed ====="
+# # ls -lh ${MODEL_DIR}
 
-cd -
+# cd -
 
 
 # echo "STEP 0: install missing python packages (debug)"
@@ -148,9 +148,9 @@ cd -
 
 # echo "===== INSTALL RUNTIME DEPENDENCIES ====="
 
-pip install --no-cache-dir \
-    fastapi \
-    marisa-trie
+# pip install --no-cache-dir \
+#     fastapi \
+#     marisa-trie
 #     pandas \
 #     gensim \
 #     tensorboardX \
@@ -162,7 +162,7 @@ pip install --no-cache-dir \
 #     "xlsxwriter"
 
 
-echo "===== DEPENDENCIES INSTALLED ====="
+# echo "===== DEPENDENCIES INSTALLED ====="
 
 
 ##############
@@ -173,4 +173,4 @@ mkdir -p outputs/Models/Claim-Detection
 mkdir -p outputs/Data/All
 mkdir -p outputs/Results/Claim-Detection
 python src/evaluation/claim-detectionE.py
-python download.py
+# python download.py
