@@ -16,7 +16,7 @@ RUN pip install --upgrade "pip<24.1" setuptools wheel
 
 # stack ổn định
 RUN pip install \
-    numpy<1.24 \
+    "numpy<1.24" \
     scipy==1.10.1 \
     torch==2.1.2 \
     gensim==4.3.2 \
