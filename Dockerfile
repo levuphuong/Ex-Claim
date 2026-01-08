@@ -35,7 +35,12 @@ RUN pip install \
     huggingface_hub
 
 # fairseq OK khi pip <24.1
-RUN pip install fairseq==0.12.2
+# RUN pip install fairseq==0.12.2
+
+RUN git clone --branch fixing_prefix_allowed_tokens_fn https://github.com/nicola-decao/fairseq
+RUN cd fairseq
+RUN pip install --editable ./
+RUN cd -
 
 # (nếu dùng GENRE)
 RUN git clone https://github.com/facebookresearch/GENRE.git
@@ -61,7 +66,7 @@ WORKDIR /app/${MODEL_DIR}
 RUN if [ ! -d "${MODEL_NAME}" ]; then \
         echo "⬇️ Downloading mGENRE fairseq model..."; \
         wget -c https://dl.fbaipublicfiles.com/GENRE/${MODEL_NAME}.tar.gz; \
-        tar --no-same-owner -xvf ${MODEL_NAME}.tar.gz; \
+        tar -xvf ${MODEL_NAME}.tar.gz; \
         rm ${MODEL_NAME}.tar.gz; \
     else \
         echo "✅ Model already exists: ${MODEL_NAME}"; \

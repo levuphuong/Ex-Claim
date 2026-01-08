@@ -1,5 +1,7 @@
 #!/bin/bash
 
+python test.py
+
 echo "STEP 1: create directory"
 mkdir -p outputs/Data/CheckThat-2022/english/verifiable-claim-detection
 
