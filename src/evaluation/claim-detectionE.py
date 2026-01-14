@@ -98,43 +98,43 @@ logging.info(f"Completed training {model_prefix}")
 ########################################################################################################################
 # Coarse-grained NER models completed. Clear all the variables
 
-ner_vectors_cg = None
-ner_tagged_sentences_cg = None
-wiki_entities_cg = None
-wiki_entity_scores_cg = None
-entity_indexes = None
-model = None
-best_model = None
-Util.clearMemory()
+# ner_vectors_cg = None
+# ner_tagged_sentences_cg = None
+# wiki_entities_cg = None
+# wiki_entity_scores_cg = None
+# entity_indexes = None
+# model = None
+# best_model = None
+# Util.clearMemory()
 
-########################################################################################################################
-ee_size = 128
-ner_model = "multinerd-mbert"
-ner_vectors_fg, ner_tagged_sentences_fg = NER.getNERVectors(path, ner_model, dataset, tokenized_input)
-entity_indexes, no_entityF = NER.getIndexVector(ner_vectors_fg)
+# ########################################################################################################################
+# ee_size = 128
+# ner_model = "multinerd-mbert"
+# ner_vectors_fg, ner_tagged_sentences_fg = NER.getNERVectors(path, ner_model, dataset, tokenized_input)
+# entity_indexes, no_entityF = NER.getIndexVector(ner_vectors_fg)
 
-train_loader = Training.getDataLoaderWithEntityData(word_embeddings, entity_indexes, class_labels, training_languages,
-                                                    ["train"], batch_size, shuffle=True)
-validation_loader = Training.getDataLoaderWithEntityData(word_embeddings, entity_indexes, class_labels,
-                                                         training_languages, ["dev"], batch_size,
-                                                         shuffle=False)
+# train_loader = Training.getDataLoaderWithEntityData(word_embeddings, entity_indexes, class_labels, training_languages,
+#                                                     ["train"], batch_size, shuffle=True)
+# validation_loader = Training.getDataLoaderWithEntityData(word_embeddings, entity_indexes, class_labels,
+#                                                          training_languages, ["dev"], batch_size,
+#                                                          shuffle=False)
 
-########################################################################################################################
-# Word embedding + Fine-grained NER
-model_prefix = "EClassifier-fNER-" + run_name
-logging.info(f"Started training {model_prefix}")
+# ########################################################################################################################
+# # Word embedding + Fine-grained NER
+# model_prefix = "EClassifier-fNER-" + run_name
+# logging.info(f"Started training {model_prefix}")
 
-for i in range(iterations):
-    model_name = model_prefix + "-" + str(i) + ".pth"
-    model = CD_Models.EXClaim(we_size, ee_size, no_entityF, hidden_size, output_size)
-    Training.trainModelWithEntityData(model, train_loader, validation_loader, learning_rate, epochs,
-                                      MODELS_PATH + model_name)
+# for i in range(iterations):
+#     model_name = model_prefix + "-" + str(i) + ".pth"
+#     model = CD_Models.EXClaim(we_size, ee_size, no_entityF, hidden_size, output_size)
+#     Training.trainModelWithEntityData(model, train_loader, validation_loader, learning_rate, epochs,
+#                                       MODELS_PATH + model_name)
 
-    best_model = Training.loadModel(model, MODELS_PATH + model_name)
-    Evaluation.evaluateTestDataWithEntity(best_model, model_name, word_embeddings, entity_indexes, dataset,
-                                          "test", path)
-Results.computeAveragePerformance(path, "test")
-logging.info(f"Completed training {model_prefix}")
+#     best_model = Training.loadModel(model, MODELS_PATH + model_name)
+#     Evaluation.evaluateTestDataWithEntity(best_model, model_name, word_embeddings, entity_indexes, dataset,
+#                                           "test", path)
+# Results.computeAveragePerformance(path, "test")
+# logging.info(f"Completed training {model_prefix}")
 
 # ########################################################################################################################
 
