@@ -106,6 +106,7 @@ def readTestData(path, task):
             dataset[language] = {"test": dev_test}
             printDataStatistics(dataset[language])
 
+    dataset = Preprocess.preprocessTweets(dataset)
     return dataset
 
 

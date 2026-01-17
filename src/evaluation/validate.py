@@ -30,7 +30,7 @@ ner_vectors, ner_tags = NER.getNERVectors(path, ner_model, dataset, tokenized_in
 entity_indexes, no_entity = NER.getIndexVector(ner_vectors)
 
 # ==== Load model ====
-model_file = "EClassifier-cNER-XLMR-0.pth"   # chỉnh số iteration nếu cần
+model_file = "EClassifier-cNER--XLMR-0.pth"   # chỉnh số iteration nếu cần
 model = CD_Models.EXClaim(
     we_size=Training.getInputSize(word_embeddings),
     ee_size=256,

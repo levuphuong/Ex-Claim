@@ -73,28 +73,28 @@ def evaluateTestDataWithEntity(model, model_name, word_embeddings, entity_indexe
     data.to_csv(path + "Data/All/combined_" + data_type + "_predictions.csv", index=False)
 
 
-def evaluateTestDataWithEntity(model, model_name, word_embeddings, entity_indexes, test_data, data_type, path):
-    device = Util.getDevice()
-    model.to(device)
-    model.eval()
-    model_col = model_name.replace(".pth", "")
+# def evaluateTestDataWithEntity(model, model_name, word_embeddings, entity_indexes, test_data, data_type, path):
+#     device = Util.getDevice()
+#     model.to(device)
+#     model.eval()
+#     model_col = model_name.replace(".pth", "")
 
-    for lang, data in test_data.items():
-        if data_type not in data:
-            continue
+#     for lang, data in test_data.items():
+#         if data_type not in data:
+#             continue
 
-        logger.info(f"Evaluating {lang} ({data_type})")
+#         logger.info(f"Evaluating {lang} ({data_type})")
 
-        WE = word_embeddings[lang][data_type].to(device)
-        E = entity_indexes[lang][data_type].to(device)
+#         WE = word_embeddings[lang][data_type].to(device)
+#         E = entity_indexes[lang][data_type].to(device)
 
-        with torch.no_grad():
-            _, preds = torch.max(model(WE, E), dim=1)
+#         with torch.no_grad():
+#             _, preds = torch.max(model(WE, E), dim=1)
 
-        data[data_type][model_col] = preds.cpu().numpy()
+#         data[data_type][model_col] = preds.cpu().numpy()
 
-        out = data[data_type].drop(columns=["preprocessed_text"])
-        out.to_csv(f"{path}/Data/{lang}/{model_col}_{data_type}.csv", index=False)
+#         out = data[data_type].drop(columns=["preprocessed_text"])
+#         out.to_csv(f"{path}/Data/{lang}/{model_col}_{data_type}.csv", index=False)
 
 
     

@@ -4,6 +4,8 @@ import re
 import logging
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
+logger = logging.getLogger("Cross-lingual-claim-detection")
+
 
 def getModelNames(test_data):
     """
@@ -19,7 +21,7 @@ def getModelNames(test_data):
     logging.info(f"Models analysed: {models}")
     return models
 
-iterations = 2
+iterations = 1
 
 def getLanguageLevelResults(test_data, models, columns_to_mean):
     """
@@ -44,6 +46,12 @@ def getLanguageLevelResults(test_data, models, columns_to_mean):
 
             for i in range(iterations):
                 col_name = f"{model}-{i}"
+                col_name = col_name.replace("--", "-")
+                language_data.columns = language_data.columns.str.replace("--", "-")
+
+                logger.info(f"Columns available: {language_data.columns.tolist()}")
+                logger.info(f"Need column: {col_name}")
+
                 predictions = language_data[col_name]
                 accuracy = accuracy_score(true_prediction, predictions)
                 precision, recall, f1, _ = precision_recall_fscore_support(true_prediction, predictions,
