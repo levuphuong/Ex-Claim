@@ -175,9 +175,9 @@ mkdir -p outputs/Models/Claim-Detection
 mkdir -p outputs/Data/All
 mkdir -p outputs/Results/Claim-Detection
 
-cd outputs/Pretrained-models/mGENRE/fairseq_multilingual_entity_disambiguation
-cp dict.source.txt dict.txt
-cd -
+#cd outputs/Pretrained-models/mGENRE/fairseq_multilingual_entity_disambiguation
+#cp dict.source.txt dict.txt
+#cd -
 
-python src/evaluation/claim-detectionE.py
+python src/evaluation/claim-detection.py
 # python download.py

@@ -73,11 +73,39 @@ def mergeTrainTestData(dataset, test_data):
     """
     grouped = test_data.groupby('language')
     for key, value in grouped:
+        # value = value.head(100)   # ⬅ giảm còn 100 mẫu
         if key in dataset.keys():
             dataset[key]['test'] = value
         else:
             dataset[key] = {'test': value}
     logger.info("Train and test data merged")
+
+
+    return dataset
+
+def readTestData(path, task):
+    """
+    Read only test data for verification
+    Format: { language: { test } }
+    """
+    dataset = {}
+    logger.info(f"Reading CheckThat 2022 {task} Test Data")
+    dataset_dir = path + DATA_DIR + "CheckThat-2022/"
+    languages = [f.name for f in os.scandir(dataset_dir) if f.is_dir()]
+
+    logger.info(f"Languages found: {languages}")
+
+    for language in languages:
+        task_dir = dataset_dir + language + "/" + task
+        if os.path.exists(task_dir):
+            logger.info(f"Reading {language} test")
+            dev_test = pd.read_csv(task_dir + "/dev_test.tsv", sep="\t")
+            dev_test["language"] = language
+            dev_test["source"] = "check-that"
+
+            dataset[language] = {"test": dev_test}
+            printDataStatistics(dataset[language])
+
     return dataset
 
 
@@ -98,7 +126,6 @@ def readTrainTestData(path, task, read_test):
         dataset = train_data
     dataset = Preprocess.preprocessTweets(dataset)
     return dataset
-
 
 def readCheckThat2022(path, task):
     """
