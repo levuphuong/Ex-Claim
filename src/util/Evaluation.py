@@ -55,6 +55,8 @@ def evaluateTestDataWithEntity(model, model_name, word_embeddings, entity_indexe
     model_col = model_name.replace(".pth", "")
 
     for language in test_data:
+        if language != "vietnamese":
+            continue
         if data_type in test_data[language]:
             logger.info(f"Evaluating {data_type} data from {language}")
             WE = word_embeddings[language][data_type]

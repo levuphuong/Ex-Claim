@@ -5,6 +5,15 @@ from transformers import pipeline
 import logging
 import src.util.Util as Util
 
+# === ADD ON TOP ===
+try:
+    from phonenlp import PhoNLP
+    PHONLP_AVAILABLE = True
+except:
+    PHONLP_AVAILABLE = False
+# ==================
+
+
 
 PRETRAINED_MODEL_DIR = "Pretrained-models/"
 logger = logging.getLogger("Cross-lingual-claim-detection")

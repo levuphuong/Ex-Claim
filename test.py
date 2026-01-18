@@ -1,15 +1,37 @@
-import pickle
-import numpy as np
-import torch
-from genre.trie import Trie, MarisaTrie
-from genre.fairseq_model import mGENRE
-import logging
+# from phonlp import load
 
-path = "outputs/"
-model_path = path + "Pretrained-models/mGENRE/"
-with open(path + "Pretrained-models/mGENRE/" + "titles_lang_all105_marisa_trie_with_redirect.pkl", "rb") as f:
-    trie = pickle.load(f)
-logging.info("Entity linking prefix tree loaded")
+# model = load(save_dir="models/phonlp")
 
-model = mGENRE.from_pretrained(model_path + "fairseq_multilingual_entity_disambiguation").eval()
-logging.info("Entity linking model loaded")
+# text = "Tôi đang làm_việc tại VinAI ."
+# annot = model.annotate(text=text)
+
+# for sent in annot:
+#     print("=== Sentence ===")
+    
+#     # 3 cases:
+#     # 1. sent = [forms, poss, ners]
+#     if len(sent) == 3 and isinstance(sent[0], list):
+#         forms, poss, ners = sent
+#         for f,p,n in zip(forms, poss, ners):
+#             print(f"{f:15} POS={p:6} NER={n}")
+    
+#     # 2. sent = list of tuples
+#     elif isinstance(sent, list) and isinstance(sent[0], tuple):
+#         for tup in sent:
+#             if len(tup) == 3:
+#                 f,p,n = tup
+#                 print(f"{f:15} POS={p:6} NER={n}")
+#             elif len(tup) == 2:
+#                 f,p = tup
+#                 print(f"{f:15} POS={p:6} NER=O")
+#             else:
+#                 print(tup)
+    
+#     else:
+#         print("Unknown format:", sent)
+from phonlp import load
+import phonlp
+
+phonlp.download(save_dir="models/phonlp")
+model = phonlp.load(save_dir="models/phonlp")
+print(model.annotate(text="Tôi đang làm việc tại VinAI."))
