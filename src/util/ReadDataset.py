@@ -96,6 +96,7 @@ def readTestData(path, task):
     logger.info(f"Languages found: {languages}")
 
     for language in languages:
+        
         task_dir = dataset_dir + language + "/" + task
         if os.path.exists(task_dir):
             logger.info(f"Reading {language} test")
