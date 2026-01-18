@@ -35,6 +35,8 @@ def getLanguageLevelResults(test_data, models, columns_to_mean):
     language_results = []
 
     for language in languages:
+        if language != "vietnamese":
+            continue
         language_data = test_data[test_data['language'] == language]
         source = language_data.iloc[0]['source']
         true_prediction = language_data['class_label']
